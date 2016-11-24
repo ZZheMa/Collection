@@ -1,0 +1,143 @@
+常用命令
+git config --global user.name "19016439"
+git config --global user.email "jay.ma1@carestream.com"
+git config --global branch.autosetuprebase always  
+git pull origin master
+git push origin HEAD:refs/for/master 
+scp -p -P 28418 19016439@kdis-git-server:hooks/commit-msg .git/hooks/
+git clone ssh://19016439@10.112.20.130:28418/CS_Imaging
+git commit -a -m "test git account"
+git config -l 查看配置
+git mv oldfile newfile
+git rm file
+git stash
+git stash pop
+
+http://kdis-git-server:8090 
+http://kdis-pc:8080 
+http://10.112.37.192:8080/    CSI-2013
+
+
+// CSI:
+提交代码的时候，
+首先git stash将已经修改的代码压栈，
+然后git pull origin master把最新的代码拉下来
+然后git stash pop，将修改的代码弹出栈，自动merge到最新的代码中
+然后git add -u,git commit -m 
+最后提交代码git push origin HEAD:refs/for/master
+该代码只是提交到gerrit中，这个平台用来codereview，然后才能提交到仓库。
+
+// 2016.8.4
+git 的命令可以重命名，
+在home目录下，修改.gitconfig文件即可C:\Users\Admin
+然后添加
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    his = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    his1d = log --pretty=format:'%h %ad | %s%d [%an]' --graph --since='one day ago'
+    his2d = log --pretty=format:'%h %ad | %s%d [%an]' --graph --since='two days ago'
+    his1w = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short --since='one week ago'
+    his1m = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short --since='one month ago'
+    type = cat-file -t
+    dump = cat-file -p
+
+
+// 创建仓库
+1.配置全局名字邮箱
+git config --global user.name "zhe.ma"
+git config --blobal user.email "zhe.ma@outlook.com"
+2.创建文件夹
+mkdir TestGit
+3.进入目录
+cd TestGit
+4.显示路径
+pwd
+5.把该目录变为Git可管理的仓库
+git init 
+6.查看该目录的文件，-ah可以看到隐藏目录
+ls (-ah)
+7.添加文件到仓库 
+git add readme.txt
+8.把文件提交到仓库,-m是输入本次提交的说明注释
+git commit -m "wrote a readme file"
+9.查看仓库当前的状态
+git status
+10.查看具体修改了什么内容
+git diff readme.txt
+11.查看提交日志,--pretty=oneline一个版本的信息变为一行
+git log (--pretty=oneline)
+eg:
+daeb1576d66ddaedd61db1c9b51bb17dc5419714 append GPL
+9b46c0fe8f035b7ac3e714eb249a20e55c0194c4 add distributed
+7bd61caf3632f2c831d63134d25fae3beeb10463 wrote a readme file
+12.版本回退
+HEAD表示当前版本，也就是最新提交的版本
+HEAD^表示上一个版本，上上个版本HEAD^^，HEAD~100上一百个版本
+回到上一个版本
+git reset --hard HEAD^
+如果再回去
+git reset --hard 版本号前几位
+13.查看每次命令
+log每次显示的都是当前的版本及更低版本号，高版本的则
+不能显示，那么只能通过查看命令来找到版本号
+git reflog
+14.查看文件
+cat readme.txt
+15.查看工作区和版本库里面最新版本的区别
+git diff HEAD -- readme.txt
+16.撤销工作区中的修改,将文件在工作区的修改全部撤销
+git checkout -- readme.txt 
+撤销暂存区的修改，也就是撤销add状态
+git reset HEAD readme.txt
+这一步只是撤消了当前的add状态，工作区的修改并没有成功。
+17.删除文件
+删除工作区的文件
+rm test.txt
+然后将版本库里面的也删除，然后提交(修改增加文件提交之前要add，删除文件提交之前要delete)
+git rm test.txt
+git commit -m "remove test.txt"
+如果是误删了，但是版本库里面还有，就可以使用撤销工作区修改来恢复
+git checkout -- test.txt
+18.忽略文件
+在你的顶层工作目录中添加一个叫".gitignore"的文件，来告诉Git系统要忽略 掉哪些文件，下面是文件内容的示例:
+# 以'#' 开始的行，被视为注释.
+# 忽略掉所有文件名是 foo.txt 的文件.
+foo.txt
+# 忽略所有生成的 html 文件,
+*.html
+# foo.html是手工维护的，所以例外.
+!foo.html
+#  忽略所有.o 和 .a文件.
+*.[oa]
+
+
+
+
+//远程仓库
+GIT仓库和GitHub仓库之间的传输是通过SSH加密的。
+1.创建SSH Key
+首先看主目录下有没有id_rsa和id_rsa_pub，如果没有则
+打开Shell，创建SSH Key：
+ssh-keygen -t rsa -C "mailMazhe@163.com"
+然后一路回车，选择默认值，如果顺利可以在主目录找到.ssh目录，
+里面有id_rsa和id_rsa.pub两个文件。这两个是SSH Key秘钥对，
+id_rsa是私钥，id_rsa.pub是公钥。
+2. 登录GitHub，打开Account settings，打开SSH Keys：
+“Add SSH Key”，添加任意title，然后key里粘贴id_rsa.pub文件的内容 
+3.添加远程仓库
+在GitHub上create a new repo
+然后按照提示进行如下操作
+关联本地仓库和远程仓库(origin)
+git remote add origin git@github.com:ZZheMa/Learn-Effective-C-.git
+第一次把本地库的所有内容推送到远程库上：
+git push -u origin master
+-u不但把本地的master分支内容推送到远程新的master分支，
+还会把本地的master分支和远程的master分支关联起来。
+从此在本地提交
+git push origin master
+第一次clone和push会有警告，输入yes
+4.从远程库克隆
+git clone git@github.com:ZZheMa/Learn-Effective-C-.git
