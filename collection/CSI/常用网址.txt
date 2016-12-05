@@ -1,0 +1,5 @@
+\\shgwp1009\CSHDental_SW\Public\Members\Dean Chen\software
+\\shgwp1009\R&D\cn-s-sh-001\IS\MS Licensed Software
+http://kdis-git-server:8090
+http://kdis-pc:8080/
+http://10.112.37.192:8080/

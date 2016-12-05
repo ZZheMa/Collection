@@ -8,6 +8,7 @@ scp -p -P 28418 19016439@kdis-git-server:hooks/commit-msg .git/hooks/
 git clone ssh://19016439@10.112.20.130:28418/CS_Imaging
 git commit -a -m "test git account"
 git config -l 查看配置
+
 git mv oldfile newfile
 git rm file
 git stash
@@ -26,6 +27,11 @@ http://10.112.37.192:8080/    CSI-2013
 然后git add -u,git commit -m 
 最后提交代码git push origin HEAD:refs/for/master
 该代码只是提交到gerrit中，这个平台用来codereview，然后才能提交到仓库。
+
+// 2016.9.14
+返回提交前状态。
+git his1d
+git reset id
 
 // 2016.8.4
 git 的命令可以重命名，
@@ -112,9 +118,12 @@ foo.txt
 !foo.html
 #  忽略所有.o 和 .a文件.
 *.[oa]
-
-
-
+19.分支
+git branch test
+git checkout test
+git branch -r 列出远程分支
+git branch 不带参数：列出本地已经存在的分支
+git branch -a 列出本地分支和远程分支
 
 //远程仓库
 GIT仓库和GitHub仓库之间的传输是通过SSH加密的。
