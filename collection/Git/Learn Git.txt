@@ -119,6 +119,8 @@ foo.txt
 #  忽略所有.o 和 .a文件.
 *.[oa]
 19.分支
+http://blog.csdn.net/djl4104804/article/details/50778736
+http://blog.csdn.net/forever_wind/article/details/37506389
 git branch test
 git checkout test
 git branch -r 列出远程分支
