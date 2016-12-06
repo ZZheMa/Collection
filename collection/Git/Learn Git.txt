@@ -50,6 +50,10 @@ git 的命令可以重命名，
     type = cat-file -t
     dump = cat-file -p
 
+	
+	
+0.本地新建一个git仓库
+Git --bare init
 
 // 创建仓库
 1.配置全局名字邮箱
@@ -126,6 +130,10 @@ git checkout test
 git branch -r 列出远程分支
 git branch 不带参数：列出本地已经存在的分支
 git branch -a 列出本地分支和远程分支
+git branch -d 分支名  删除分支
+git stash list查看stash列表
+git stash apply stash@{0} 恢复某个stash
+git log --graph --pretty=oneline --abbrev-commit 查看是分支线情况
 
 //远程仓库
 GIT仓库和GitHub仓库之间的传输是通过SSH加密的。
