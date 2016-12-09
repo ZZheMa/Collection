@@ -8,6 +8,7 @@ scp -p -P 28418 19016439@kdis-git-server:hooks/commit-msg .git/hooks/
 git clone ssh://19016439@10.112.20.130:28418/CS_Imaging
 git commit -a -m "test git account"
 git config -l ≤Èø¥≈‰÷√
+git clone git@kdis-git-server:CSI_Document.git csi/csdcŒƒµµ
 
 git mv oldfile newfile
 git rm file
