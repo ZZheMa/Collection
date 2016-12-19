@@ -138,11 +138,11 @@ int main() {
 例如static局部变量，全局的生存周期，局部的作用域。
 
 11.资料：
-http://blog.chinaunix.net/uid-23069658-id-3981406.html
-http://blog.csdn.net/wu5215080/article/details/38899259
-http://blog.csdn.net/wu5215080/article/details/38899259
-http://blog.chinaunix.net/uid-25667116-id-3064937.html
-http://blog.csdn.net/pi9nc/article/details/12419819
+http://blog.chinaunix.net/uid-23069658-id-3981406.html  深入理解C语言的函数调用过程 
+http://blog.csdn.net/wu5215080/article/details/38899259  C语言之内存四区模型和函数调用模型
+http://blog.csdn.net/wu5215080/article/details/38899259  C语言之内存四区模型和函数调用模型
+http://blog.chinaunix.net/uid-25667116-id-3064937.html  栈的一点理解
+http://blog.csdn.net/pi9nc/article/details/12419819 程序的链接与装入（动、静态重定位）
 
 
 
