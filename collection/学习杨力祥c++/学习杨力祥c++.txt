@@ -137,6 +137,14 @@ int main() {
 10.作用域，生存周期。
 例如static局部变量，全局的生存周期，局部的作用域。
 
+11.资料：
+http://blog.chinaunix.net/uid-23069658-id-3981406.html
+http://blog.csdn.net/wu5215080/article/details/38899259
+http://blog.csdn.net/wu5215080/article/details/38899259
+http://blog.chinaunix.net/uid-25667116-id-3064937.html
+http://blog.csdn.net/pi9nc/article/details/12419819
+
+
 
 第五天
 1.讨论：对象定义时，为什么要对象自动调用构造函数，而不是外部调用？
