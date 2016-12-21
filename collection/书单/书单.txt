@@ -1,0 +1,32 @@
+未读
+1.深入理解计算机系统
+2.The C Programming language
+3.提高C++性能的编程技术
+4.深度探索C++对象模型
+5.more effective C++
+6.exceptional C++
+7.more exceptional C++
+8.thinking in C++
+9.C++沉思lu
+10.effective stl
+11.C++语言的设计和演化
+12.C++程序设计语言
+13.C++程序设计原理与实践
+14.计算机程序的构造和解释
+15.啊哈，算法
+16.程序是怎样跑起来的
+17.设计模式
+18.敏捷开发
+
+
+已读
+1.effective C++
+2.accelerated C++
+3.essential C++
+4.大话设计模式
+5.大话数据结构
+
+
+
+
+
