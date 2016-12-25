@@ -53,8 +53,120 @@ int main() {
 void (*ptr[])() = { Fun1, Fun2, Fun3 };
 
 
+LESSON 5
+1.引用是“别名其表，指针其实”。引用的类型必须和变量的类型一样，引用实质上是一个指针，
+引用完全具有指针的功能。
+eg：
+void main() {
+  int i = 4;
+  int j = 8;
+  int& r = i; 
+}
+栈区内存地址     变量内容
+0X0065FDF4       i = 4
+OX0065FDF0       j = 8
+0X0065FDEC       i的引用r，内容为地址0X0065FDF4，也就是i的地址。
+
+从上述的例子可以看到，引用不占用空间是错误的说法，引用实际上就是指针。
+引用一经初始化后，就不能重新指向其它的变量，即所存储的地址值不能那个再次更改。
+
+但是人们并不能拿到引用这个指针的地址，C++语法使其操作起来就像操作原来的变量一样，
+语法层面将其指针的特性进行了隐藏。但是编译器对其实现时，将其处理为指针。C++这样做的
+好处使用户用起指针来更加方便。
+
+2.函数调用过程：
+void Swap();
+void main() {
+  int a;
+  int b;
+  Swap(a, b);
+}
+A.保存调用程序（function caller，此处即main()）在调用子函数swap( )时的地址，即返主地址，
+将其压入栈内，以便在调用子函数swap的操作结束之后返回原地。
+B.将函数返回值以及实参复制为副本(copy)后压入栈内，以便代替形参来参加函数的运行。
+C.将函数运行时将要使用的各寄存器（主要是EBP、EBX、ESI和EDI）的内容压入栈内，加以保存。现场保护。
+D.执行被调用函数swap()的函数体内的全部语句。
+E.如函数有返回值，则将该返回值写入寄存器EAX内,通过它传递给调用函数的程序（即main()）。
+F将各寄存器内容弹出栈，释放被占栈空间,恢复调用函数的程序的运行状态。回复现场。
+G.按照返主地址将控制权交还给调用函数（即main()）。
+
+3.void
+A.void变量是“什么变量都没有”。
+B.void fun();表示函数fun不返回任何变量。
+C.void指针表示“任何类型的指针”。
+D.void fun(void*);表示函数fun的形参可以是任何类型的指针。
+
+4.new与malloc相比的优点是：
+A.new能够按照变量类型自动的分配该类型所需空间长度，不必使用sizeof。
+B.new能够返回正确的指针类型。
+C.new出来的对象会自动调用对象的构造函数，将对象初始化。
 
 
+LESSON 6
+1.堆区块的结构。
+每当调用运算符new在堆区块内分配空间时，系统就为用户分配一个堆区块。该区块包括首部域
+和用户数据两个域。首部域存放管理数据，用户数据域存放用户数据。首部域的长度是固定的，
+32个字节，用于存放8个管理数据，每个数据都是一个整形变量。用户数据长度是变动的，不小于
+用户数据的长度，其最短字节为16字节。为了方便管理，它的长度按照16字节递增。而new返回来
+的指针指向的是用户数据域名的首地址。首部域的八个管理数据包括链表首位结点的首地址，
+用户数据长度，用户堆区块数量，该区块的序号等。
+
+2.堆区块的建立和管理。
+所分配的堆区块空间按照双向链表（包含前向链表和后向链表）进行管理。每当系统函数
+或者用户函数调用new申请分配堆区空间时，系统即建立一个堆区块，形成新结点，
+将其插入到前向链表的前端，形成前向链表的首结点。
+eg：
+void main() {
+  int* ptr1 = new int(10);  // 初始化为10，并不是长度为10的数组。
+  double* ptr2 = new double(12.34);
+  int* ptr3 = new int[3];
+  
+  // 读取第一个堆区块
+  int* show = ptr1 - 8;  // 移动指针到堆区块的首部域的第一个数据的地址。
+  for (int j = 1; j < 9; ++j) {
+    cout << "Element " << j << " address : " << show;
+	cout << "  Value : " << *show++ << endl;
+  }
+  // 读取第二块和第三块堆区块的数据。可以通过里面的首部域数据，将这三个结点连接起来。
+}
+
+3.new operator 和operator new。
+http://blog.csdn.net/wudaijun/article/details/9273339
+
+A.new operator: 指我们在C++里面通常用到的关键字。
+eg:
+A* a = new A;
+delete a;
+这个操作第一步分配内存。第二步调用A的构造函数初始化对象。第三步返回分配指针。
+事实上分配内存就是有operator new(size_t)来完成的，如果类A重载了operator new，
+那么将调用A::operator new(size_t),否则调用C++默认提供的operator new(size_t)。
+delete a这一操作也类似，包含了调用析构函数和operator delete(size_t)两个步骤。
+
+B.operator new: 它指一个操作符，并且可被重载。operator new就象 malloc 一样，
+operator new 的职责只是分配内存，它对构造函数一无所知。
+A* a = (A*)operator new(sizeof(A));
+
+operator new有三种形式：
+throwing (1)    
+void* operator new (std::size_t size) throw (std::bad_alloc);
+nothrow (2) 
+void* operator new (std::size_t size, const std::nothrow_t& nothrow_value) throw();
+placement (3)   
+void* operator new (std::size_t size, void* ptr) throw();
+
+(1)(2)的区别仅是是否抛出异常，当分配失败时，前者会抛出bad_alloc异常，后者返回null，不会抛出异常。
+它们都分配一个固定大小的连续内存。
+A* a = new A; //调用throwing(1)
+A* a = new(std::nothrow) A; //调用nothrow(2)
+(3)是placement new，它也是对operator new的一个重载，定义于#include <new>中，它多接收一个ptr参数，
+但它只是简单地返回ptr。它可以实现在ptr所指地址上构建一个对象(通过调用其构造函数)，这在内存池技术上有广泛应用。 
+
+4.变量的两个基本属性：生命周期和作用域。
+
+5.所有静态变量在使用前必须加以定义，它们被定义时即自动被初始化，具有缺省值为零，
+这一点与全局变量（外部变量）相同。因此，对于int型静态变量用0值初始化是多余的。
+ 
+ 
 
 
 
