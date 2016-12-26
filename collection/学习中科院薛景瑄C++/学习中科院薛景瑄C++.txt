@@ -189,6 +189,19 @@ LESSON 7
 有人称之为数据隐藏。
 
 
+LESSON 8
+1.常量数据和数据的引用不能再构造函数中直接赋值，需要用初始化成员列表。
+eg：
+class A {
+public:
+  A(int a, int& b)
+    : pi(a)
+    , r(b) {
+  }	
+private:
+int& r;
+const int pi;
+}
 
 
 
