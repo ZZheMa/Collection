@@ -329,17 +329,66 @@ eg: class Z : public X, public Y;
 
 
 LESSON 12
+1.多继承的二义性，例如两个基类都有数据成员int a，obj.a无法规定是哪一个a，因此出现二义性。
+多继承的二义性有两种情况：
+A.访问不同基类中的相同成员时可能出现的二义性
+eg: Base1 中有a，Base2中也有a，Derived 继承Base1和Base2。
+B.访问共同基类中的成员时可能出现的二义性
+eg：Base中有a，Base1继承Base，Base2继承Base，Derived继承Base1和Base2。
 
+2.虚基类：程序中在class base的派生类的继承方式前加上virtual关键词,从而声明class base为虚基类。
+主要解决了多继承情况B（访问共同基类中的成员时可能出现的二义性）的二义性。
+eg：
+class Derived : virtual public Base;  // Base则被声明为虚基类。虚基类解决了多继承的二义性问题。
+eg：
+class base {
+public:
+	base(int i) { a=i; cout<<"CONS_B"<<endl;	}
+	int a;
+};
+class derive1 : virtual public base {
+public:
+	derive1(int i):base(i) { cout<<"CONS_D1"<<endl;	}
+};
+class derive2 : virtual public base {
+public:
+	derive2(int i):base(i) {	cout<<"CONS_D2"<<endl;	}
+};
+class grand : public derive1, public derive2 {	
+public:
+	grand (int i) : derive1(i+1), derive2(i-1), base(i) {cout<<"CONS_G"<<endl;	}
+};
 
+void main()
+{
+	grand g(123);
+	cout<<"g.a = "<<g.a<<endl;
+}
+输出：
+CONS_B
+CONS_D1
+CONS_D2
+CONS_G
+g.a = 123
+以上输出结果显示class base的构造函数值调用了一次而不是两次。如果不用虚基类的方式，则base的构造函数
+会调用两次，也就是说不用虚基类，会产生两份成员变量a。
 
+3.虚基类名曰“共享继承”，又名曰“各派生类的对象共享基类的的一个拷贝”。
 
+4.虚基类部分的初始化和一般多继承中基类部分的初始化在语法上是相同的，但构造函数的调用顺序不同，
+服从以下规则：
+A.同一层中先调用虚基类的构造函数，然后调用非虚基类的构造函数。
+B.同一层中存在多个虚基类时，按照各虚基类的声明顺序来调用。
+C.如虚基类V由非虚基类B派生而来，则先调用基类B的构造函数，然后调用派生类V的构造函数。
+例子详见课件chapter4。
 
+5.向基类传递参数的规则：
+（第一条）在没有虚基类的情况下，只准逐级向上传递参数，而不允许越级向间接基类传递参数。
+（第二条）在有虚基类的情况下，虚基类的初始化参数只能够从最下层用于建立对象的类中直接传递上来。
+详细例子见课件chapter4。
 
-
-
-
-
-
+6.虚基类用的并不多，语法复杂，容易出错，理解还是很容易的，可以查看chapter4的内容，原理还是有必要
+了解一下，学习原理，了解C++的内部实现思路。
 
 
 
