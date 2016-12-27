@@ -282,6 +282,12 @@ class Derived : public Base {
 void main() {
   Base b;
   Derived d;
+  
+  // 证明基类对象在栈区里面先有基类的数据成员然后是子类的数据成员。
+  Derived* p = &d;
+  int* ptr = (int*)p;
+  cout << *p << endl;  // 输出基类a的值。
+  cout << *(p++) << endl;  // 输出子类b的值。
 }
 对象b在栈区的存储着变量int a。而对象d在栈区存储着基类部分的成员变量int a和自己的变量int b。
 当建立派生类的对象后，派生类对象的内存栈区空间中既包括基类部分的也包括派生类部分的
@@ -292,6 +298,38 @@ void main() {
 2.派生类对象的栈区存储内容与继承方式和访问权限无关。C++的继承是加机制，私有继承不能访问基类成员，
 并不代表子类没有继承基类的数据成员，只是没有访问权限罢了。所以派生类对象的栈区还是基类到子类的所有
 数据成员。
+
+
+LESSON 11
+1.继承访问映射关系表
+
+基类成员的访问属性	 派生类的继承方式	 映射到派生类的访问属性（派生类内访问权限）
+     private	     public	             不可访问
+     protected	     public	             protected
+     public	         public	             public
+     private	     protected	         不可访问
+     protected	     protected	         protected
+     public	         protected	         protected
+     private	     private	         不可访问
+     protected	     private	         private
+     public	         private	         private
+
+2。而一个类对象的栈区存储内容则包括该类及其所有基类（直接的和间接的）的全部非静态数据成员
+（无论能否访问），也包括虚指针，但不包括任何静态数据成员和成员函数，它与继承方式及访问权限无关。
+
+3.单继承构造函数的调用顺序：先祖先（基类），再客人（成员对象），后自己（派生类本身）。
+析构函数的调用顺序正好和构造函数相反。
+先调用基类的成员函数时，也是按照先客人再自己的顺序。
+
+4.多继承构造函数的调用顺序：和单继承的顺序一致，只不过同时继承的多个基类的顺序是按照声明的顺序。
+eg: class Z : public X, public Y;
+基类X和Y的构造函数的调用顺序决定于多继承时声明基类的顺序。与初始化列表的顺序无关。
+
+5.对象栈区存储内容的排列顺序取决于成员变量声明的顺序。
+
+
+LESSON 12
+
 
 
 
