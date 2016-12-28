@@ -408,6 +408,48 @@ overwrite：重写，子类重写父类虚函数。
 
 
 LESSON 14
+1.重载运算符有两种形式，一种是友元函数，另一种是成员函数。
+
+2.重载运算符的友元函数形式。重载运算符一般的目的是作用于自定义类型的对象。例如重载加号，使得
+point1 + point2。所以该重载必须可以访问类Point的成员变量，所以该重载函数为Point类的友元函数。
+eg：
+class Point {
+public:
+friend Point operator+(const Point& point1, const Point& point2) {
+  Point point;
+  point.x = point1.x + point2.x;
+  point.y = point1.y + point2.y;
+  return point;
+}
+private:
+  int x;
+  int y;
+}
+编译器如何知道何时调用重载的运算符，还是调用预定义的运算符？编译器完全是根据操作数的类型类确定。
+
+3.通过使用友元类和重载赋值运算符实现一个类给另一个类赋值。
+eg:
+class A {
+friend class B;
+}
+class B {
+B& operator=(const A& a);
+}
+
+4.重载赋值运算符时，注意自我赋值的判断。
+eg:
+class A {
+public:
+A& operator=(const A& a) {
+  if (this == &a) {
+    return *this;
+  }
+  ...
+}
+}
+
+
+LESSON 15
 1.
 
 
