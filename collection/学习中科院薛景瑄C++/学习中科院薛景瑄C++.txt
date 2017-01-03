@@ -679,13 +679,97 @@ B.Èç¹ûclass square¾ßÓÐ¶à¸öÐéº¯ÊýÊ±£¬ÈçºÎÄÜÕÒµ½square:: Area( ) µÄµ÷ÓÃÖ¸ÁîµÄµØÖ·Ä
 ±àÒëÏµÍ³ÔÚ±àÒëÖÐ¾ÍÒÑÍê³É´ËËùÎ½¶¯Ì¬Áª±àµÄÕû¸ö¹ý³Ì£¬ËùÒÔËüÊµÖÊÉÏÓ¦ÊÇ¾²Ì¬µÄÁª±à¹ý³Ì¡£
 
 
+LESSON 17
+1.ÓÐÐéº¯ÊýµÄ¶ÔÏóµÄÄÚ´æÎª¡°Ðéº¯ÊýÖ¸Õë+Êý¾Ý³ÉÔ±¡±¡£Êý¾Ý³ÉÔ±=»ùÀàÊý¾Ý³ÉÔ±+±¾ÉíÊý¾Ý³ÉÔ±¡£µ±»ùÀàÖ¸ÕëÖ¸Ïò¸Ã¶ÔÏó
+Ê±£¬Æä¿ÉÒÔ·ÃÎÊµÄÊÇ¡°Ðéº¯ÊýÖ¸Õë+»ùÀàÊý¾Ý³ÉÔ±¡±¡£¶øÐéº¯ÊýÖ¸ÕëÊÇ¸Ã¶ÔÏóµÄÐéº¯ÊýÖ¸Õë£¬¸Ã¶ÔÏóµÄÐéº¯ÊýÖ¸ÕëÖ¸ÏòÁË
+×Ô¼ºµÄÐéº¯Êý±í£¬ËùÒÔ¼´Ê¹»ùÀàÖ¸ÕëÖ¸Ïò¸ÃÅÉÉúÀà¶ÔÏóÊ±£¬»¹ÊÇÖ»ÄÜµ÷ÓÃ¸Ã¶ÔÏóµÄº¯Êý¡£Èç¹ûÃ»ÓÐÐéº¯ÊýÖ¸ÕëÊ±£¬ÄÇÃ´
+»ùÀàÖ¸Õëµ÷ÓÃ¸Ãº¯ÊýÊ±£¬¾Í»áµ÷ÓÃ»ùÀàµÄº¯Êý£¬ÒòÎª»ùÀàÖ¸ÕëÖ»ÄÜ·ÃÎÊ»ùÀà¶«Î÷£¬Ò²¾ÍÊÇ¾²Ì¬Áª±à£¬ÔÚº¯ÊýÖ¸Áî±íÖÐ
+ÕÒµ½»ùÀàµÄº¯Êý¡£Èç¹ûÓÐÐéº¯ÊýÖ¸Õë£¬ÄÇÃ´±àÒëÆ÷¾Í»á½øÐÐÁíÒ»ÖÖ¶¯×÷£¬ÕâÐ©¶¼ÊÇ±àÒëÆ÷±àÒëÊ±¸ù¾Ý²»Í¬µÄÇé¿ö½øÐÐ
+²»Í¬µÄ¶¯×÷¡£
 
+2.eg£º
+class container {		
+protected:
+	double dimension;
+public:  
+  virtual double surface() { return 0.0; }   
+  virtual double volume() { return 0.0; }    
+};
+class cube : public container{		
+public:  
+  virtual double surface()
+		{ return (6 * dimension * dimension); }   
+  virtual double volume()
+		{ return (dimension * dimension * dimension); }   
+};
+class sphere : public container{		
+public:  
+  virtual double surface()
+		{ return (4 * PI * dimension * dimension); }   
+  virtual double volume()
+		{ return ( PI * dimension * dimension * dimension * 4/3); }   
+};
+void main()
+{
+	container *ptr;											//1
+	cube obj1(4);											//2
+	ptr = &obj1;											//3
+	cout<<"cube's surface is "<<ptr->surface( )<<endl;		//4
+	cout<<"cube's volume is "<<ptr->volume( )<<endl;		//5
+	sphere obj2(5);											//6
+	ptr = &obj2;											//7
+	cout<<"sphere's surface is "<<ptr->surface( )<<endl;		//8
+	cout<<"sphere's volume is "<<ptr->volume( )<<endl;		//9
+}
+A£®Ö÷³ÌÐòµÚÒ»¾ä½¨Á¢»ùÀàÖ¸Õëptr¡£
+B£®Ö÷³ÌÐòµÚ¶þ¾ä½¨Á¢¶ÔÏóobj1²¢ÇÒ³õÊ¼»¯¡£
+C£®Ö÷³ÌÐòµÚÈý¾ä½«»ùÀàÖ¸ÕëptrÖ¸Ïò¶ÔÏóobj1¡£
+D£®Ö÷³ÌÐòµÚËÄ¾äµ÷ÓÃº¯Êýptr->surface( )£¬±àÒëÏµÍ³Í¨¹ýÐéÖ¸Õëobj1.VPTRÕÒµ½ÐéµØÖ·±íobj1.vtable£¬
+´Ó¶øÕÒµ½cube :: surface( )µÄµ÷ÓÃÖ¸ÁîµØÖ·£¬½ø¶øÍ¨¹ý¸Ãµ÷ÓÃÖ¸ÁîÀ´µ÷ÓÃº¯Êýcube :: surface( )¡£
+E£®Ö÷³ÌÐòµÚÎå¾äµ÷ÓÃº¯Êýptr->volume( )£¬±àÒëÏµÍ³Í¨¹ýÐéÖ¸Õëobj1.VPTRÕÒµ½ÐéµØÖ·±íobj1.vtable£¬
+Í¨¹ýÐéµØÖ·±íobj1.vtable±íÖÐµÄÆ«ÒÆµØÖ·ÕÒµ½cube :: volume( )µÄµ÷ÓÃÖ¸ÁîµØÖ·£¬½ø¶øÍ¨¹ý¸Ãµ÷ÓÃÖ¸Áî
+À´µ÷ÓÃº¯Êýcube :: volume( )¡£
 
+3.¾²Ì¬µÄ³ÉÔ±º¯Êý²»ÄÜÎªÐéº¯Êý¡£ÒòÎªËüÃ»ÓÐthisÖ¸Õë£¬Í¬Ê±ËüÓÉ¸ÃÀàµÄËùÓÐ¶ÔÏó¹²Ïí£¬ÎÞ·¨ÓÉµ¥¸ö¶ÔÏó×¨ÓÃ¡£
 
+4.µ±Ò»¸öÀàÖÐ°üº¬ÖÁÉÙÒ»¸ö´¿Ðéº¯ÊýÊ±£¬¸ÃÀà¼´ÊÇ³éÏóÀà¡£¶ø³éÏóÀàÊÇ²»ÄÜ½¨Á¢¶ÔÏóµÄ¡£
 
+5.C++ÓïÑÔ¶àÌ¬ÐÔµÄÁíÒ»ÖÖ±íÏÖÊÇÄ£°å£¬Ò²³ÆÎª²ÎÊý¶àÌ¬ÐÔ¡£ÆäÊµ¾ÍÊÇ½«ÀàÐÍ½øÐÐ²ÎÊý»¯¡£
 
+6.eg£º
+template <typename T>
+class array {
+	 array(int s);
+	 ~array();
+};
+template <typename T>
+array<T>::array(int s){
+}
 
+7.Ä£°å·ÖÎªº¯ÊýÄ£°åºÍÀàÄ£°å¡£
 
+8.º¯ÊýÄ£°åÊµÀý»¯ÎªÄ£°åº¯Êý¡£ÀàÄ£°åÊµÀý»¯ÎªÄ£°åÀà£¬Ä£°åÀàÊµÀý»¯Îª¶ÔÏó¡£
+
+9.ÔÚÊ¹ÓÃº¯ÊýÄ£°åÊ±£¬Ê×ÏÈº¯ÊýÄ£°åÖÐ²ÎÊýÀàÐÍ±»Ô¤¶¨ÒåÊý¾ÝÀàÐÍ»òÓÃ»§×Ô¶¨ÒåÊý¾ÝÀàÐÍËùÌæ´ú£¬
+Ò²¼´º¯ÊýÄ£°å±»ÊµÀý»¯(instantiated)ÎªÄ£°åº¯Êý£¬È»ºó¸ÃÄ£°åº¯ÊýÔÙ±»µ÷ÓÃ¡£
+¿ÉÒÔÍÆ²â£¬±àÒëÆ÷Ê×ÏÈ½«Í¨¹ýÀàÐÍÀ´½«Æä½øÐÐÊµÀý»¯£¬ÓÐ¶àÉÙÖÖÀàÐÍÊµÀý»¯¶àÉÙÖÖº¯Êý£¬È»ºó¾ßÌåµ÷ÓÃ¡£
+Ä£°å´ïµ½ÁË´úÂëµÄ¸´ÓÃ£¬µ«ÊÇ²¢Ã»ÓÐÊ¹±àÒëºóµÄ´úÂë¼õÉÙÁË£¬Ö»ÊÇ±àÒëÆ÷°ïÎÒÃÇ×öÁËÕâÐ©ÊÂ¡£
+
+10.ÖØÔØºÍÄ£°å¶¼´æÔÚÊ±µÄµ÷ÓÃË³Ðò£ºÏÈÖØÔØ£¬ÔÙÄ£°å£¬ºóÏà½ü¡£
+ÔÚ»ìºÏÊ¹ÓÃÖØÔØµÄº¯ÊýºÍÄ£°åÊ±£¬Ó¦µ±±ÜÃâ¶þÒåÐÔ¡£´ËÊ±ËüÃÇµÄµ÷ÓÃË³ÐòÊÇ£º
+A.ÏÈµ÷ÓÃÆ¥ÅäµÄÖØÔØº¯Êý¡£
+B.ÈçÎÞÆ¥ÅäµÄÖØÔØº¯Êý£¬Ôòµ÷ÓÃÆ¥ÅäµÄº¯ÊýÄ£°å¡£Èç¹ûÕÒµ½£¬Ôò½«ÆäÊµÀý»¯£¬½¨Á¢Ò»¸öÄ£°åº¯Êý¡£
+C.ÈçÔÙÆ¥Åä²»ÉÏ£¬Ôòµ÷ÓÃÏà½üµÄÖØÔØº¯Êý£¬´ËÊ±¿ÉÄÜ¶ªÊ§¾«¶È¡£
+
+11.ÖØÔØº¯ÊýÓëº¯ÊýÄ£°å¶¼ÊôÓÚ¶àÌ¬ÐÔ»úÖÆ£¬ËüÃÇµÄÇø±ðÈçÏÂ£º
+£¨1£©Ö÷º¯Êýµ÷ÓÃÖØÔØº¯ÊýºÍÄ£°åº¯ÊýµÄ¸ñÊ½ÍêÈ«ÏàÍ¬¡£
+ÖØÔØº¯ÊýµÄÓÅµãÊÇÄÜ¹»¶Ô²»Í¬Êý¾ÝÀàÐÍÊ¹ÓÃ²»Í¬³ÌÐòÂß¼­½øÐÐÀàËÆ²Ù×÷¡£
+ÀýÈçÓÃÓÚÇóÈ¡int»òdoubleµÄ×î´óÖµµÄ³ÌÐòÂß¼­ºÍ²Ù×÷¾ÍºÍÇóÈ¡char»òchar*µÄ×î´óÖµµÄ³ÌÐòÂß¼­ºÍ²Ù×÷²î±ðºÜ´ó¡£
+¶øº¯ÊýÄ£°åÎÞ·¨´¦Àí¡£Èç¹ûÃ¿ÖÖÊý¾ÝÀàÐÍµÄ³ÌÐòÂß¼­ºÍ²Ù×÷ÏàÍ¬£¬ÔòÊ¹ÓÃº¯ÊýÄ£°å½«»á¸ü¼Ó¼ò½àºÍ·½±ã¡£
+Ä£°åÊÇÒ»ÖÖ´úÂë²úÉú»úÖÆ¡£
+£¨2£©ÖØÔØº¯ÊýÖÐ£¬ÎÞÂÛËüÃÇÊ¹ÓÃÓë·ñ£¬È«²¿¶¼´æÓÚ´úÂëÇøÖÐ£¬¶¼Õ¼ÓÃ¿Õ¼ä¡£¶øÔÚº¯ÊýÄ£°åÖÐ£¬
+Ö»µ±Ê¹ÓÃÒ»¸ö¾ßÌå²ÎÊýÀàÐÍÊ±²Å½¨Á¢Ò»¸öÄ£°åº¯Êý£¬¶øµ±Ê¹ÓÃÁíÒ»¸ö¾ßÌå²ÎÊýÀàÐÍÊ±ÔÙ½¨Á¢ÁíÒ»¸öÄ£°åº¯Êý¡£
+±à³Ì·½±ã£¬Ê¹ÓÃÁé»î£¬Ð§ÂÊ½Ï¸ß¡£
 
 
 
