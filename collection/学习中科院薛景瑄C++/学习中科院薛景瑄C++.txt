@@ -772,17 +772,129 @@ C.如再匹配不上，则调用相近的重载函数，此时可能丢失精度。
 编程方便，使用灵活，效率较高。
 
 
+LESSON 18
+1.类模板的派生
+eg1：基类的类模板派生出派生类的类模板时，其构造函数的初始化列表要求一定格式。
+template<typename T>
+class A {
+public:
+	A(T a)	{	cout << "CONS_A:" << a << endl;	}
+};
+
+template<typename S, typename T>
+class B:public A<T> {
+public:
+	B(S a, T b) : A<T>(b)	{	cout << "CONS_B:" << a << endl;	}
+};
+
+template<typename X, typename Y, typename Z>
+class D:public B< X, Y >{	
+public:
+	D(X a, Y b, Z c) : B<X, Y> (a, b)	{	cout << "CONS_D:" << c << endl;	}
+};
+
+void main()
+{
+	D< int, double, int >   	obj1(8, 4.4, 16);
+	D< int, char*, double > 	obj2(4, "good", 16.8);
+}	
+
+eg2：基类和派生类分别使用不同数据类型
+template <typename T>
+class A{
+public:
+	void f(T a)	{  cout << a << endl;	}
+};
+
+template< typename X, typename Y>
+class B:public A<Y>{
+public:
+	void g(X b)	{	cout << b << endl; }
+};
+
+void main(){
+	B < char, int >	 bb;
+	bb.f(10);
+	bb.g('A');
+}
+
+2.typeid运算符，在c++中，typeid用于返回指针或引用所指对象的实际类型。
+eg1:用typeid获取类型名
+class Base{
+public:
+    virtual void vvfunc() {}
+};
+class Derived : public Base {};
+int main() {
+    Derived* pd = new Derived;
+    Base* pb = pd;
+
+    cout << typeid( pb ).name() << endl;   // prints "class Base *"
+    cout << typeid( *pb ).name() << endl;  // prints "class Derived"
+    cout << typeid( pd ).name() << endl;   // prints "class Derived *"
+    cout << typeid( *pd ).name() << endl;  // prints "class Derived"
+}
+
+eg2:用typeid判断模板参数类型。
+template<class T>
+void Test(T t){
+  if (typeid(T).name() == typeid(double).name()) {
+    cout << "correct" << endl;
+  }
+}
+
+int main() {
+  Test<double>(12.2);
+  return 0;
+}
 
 
+LESSON 19
+1.使用系统的异常类class exception，为此，须包含头文件<exception>。
+eg:
+void main(){
+	try {   
+		cout << "The quotient of 18/9 is " << quotient ( 18, 9 ) << endl;
+		cout << "The quotient of 18/0 is " << quotient ( 18, 0 ) << endl;
+		cout << "The quotient of 4.5/9 is " << quotient ( 4.5, 9 ) << endl;
+		}
+	catch ( exception ex ){
+		cout << ex.what( ) << '\n';
+	}
+}
+
+2.用户自己定义系统class exception的派生异常类。
+eg:
+class Except_derive : public exception{
+   char *message;
+public:
+	Except_derive(char * ptr) { message = ptr; }
+	virtual const char * what( ) const { 	return message; }
+	void handling ( )	{
+		cout << "Enter divisor（分母）again : ";
+		cin >> divisor;
+	}
+};
+void main() {
+		try		{
+			if ( divisor == 0 )    throw Except_derive( "divide by zero!" );
+			cout<< "The quotient is: " <<(numerator/divisor)<<endl; 
+			flag = false;
+		}catch ( Except_derive ex ) 
+		{ // exception handler
+			cout << "Exception : " << ex.what( ) << '\n';
+			ex.handling ( );
+		}
+}
 
 
-
-
-
-
-
-
-
+LESSON 20
+1.eg：
+try(}{catch ( except & ex ) 和 try{} catch ( except* ex )
+（1）使用异常类对象指针捕获异常时，一般在堆区中分配空间，因此当异常处理完毕后，必须删除堆区内的异常对象，
+否则将造成资源泄漏。
+（2）使用异常类对象引用捕获异常时，由于异常类对象是在栈区中建立的，因此当异常处理完毕后程序
+退出捕获程序块时，异常对象将被自动删除。
 
 
 
