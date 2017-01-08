@@ -961,7 +961,140 @@ void main(){
 此时，上一个数值的输入操作结束。如果此非有效字符正好是下一个输入数值的有效字符则此非有效字符
 被存入缓存内，作为下一次输入字符的有效字符。
 
+7.cin用于读取字符串时，应该指出：所留出的缓存空间必须是在栈区或堆区内，而不应在数据区内。
+eg：导致崩溃代码：
+char* c_str = "adsf";
+cin >> c_str;
 
+8.自定义输入函数
+当输入错误字符时，将可能造成输入错误，并使运算符函数cin返回零值。为解决此问题，用户可自己定义输入函数，
+将错误地输入的字符筛选掉，而只接受有效字符。
+[例1]用于浮点数的输入函数：只接收数字符和句点符
+// 将输入的字符串转换为一个浮点型数据。	
+// 当输入小数点以外的其他非数字字符时，该程序能够越过它，不予理睬。
+// 另外，如果你输入出错，可使用键盘右上角的'backspace'键，将错字符删去。
+// 当输完一个完整数据之后，可用回车键（CR），函数conv( )就进行转换，
+// double atof(char *)在读入12...34时，将会把它转换为12
 
+#include <iostream.h>    	
+#include <stdlib.h>    	//for double atof(const char *)
+#include <conio.h>    	//for getch( )
+
+double conv( )
+{
+	char keych;
+	char arr[12];
+	for(int i=0;;)
+	{
+		keych = getch();		// read the low-byte keystroke
+		if ( keych == 13)		//CR key
+		{
+			cerr<<endl;
+			break;
+		}
+		if ( ( (keych>='0') && (keych<='9') ) || (keych == 8) || (keych == 46) )
+		{
+			cerr<<keych;
+			if ( keych == 8)	//'backspace' key
+			{	i--;	cerr<<' '<<keych;	//erase unwanted char and go back again
+			}
+			else	arr[i++] = keych;
+		}
+	} 
+	arr[i] = '\0';
+	return atof(arr);
+}
+void main()
+{
+	double d, e, f;
+	cerr<<"Please input three double values:(CR)";
+	d = conv( );
+	e = conv( );
+	f = conv( );
+	cout << d << " " << e << " " << f <<endl;
+}
+/* Results:
+Please input three double values (CR) : 12.56
+12.34
+12.78
+12.56 12.34 12.78
+*/
+
+8.流输入运算符”>>” 重载
+eg1:
+#include <iostream.h>
+
+class three
+{
+	int x, y, z;
+public:
+	three (int xi, int yi, int zi)
+	{
+		x = xi;
+		y = yi;
+		z = zi;
+	}
+	void print()
+	{
+		cout<<"x="<<x<<" y="<<y<<" z="<<z<<endl;
+	}
+	friend istream& operator >>(istream& input, three& obj);
+};
+
+istream& operator >>(istream& input, three& obj)
+{
+	cout<<"Input coordinates x, y, z:";
+	input>>obj.x;
+	input>>obj.y;
+	input>>obj.z;
+	return input;
+}
+
+eg2:
+double conv( )
+{
+	char keych, prevch;
+	char arr[12];
+	int n=0;		//by何海清
+	for(int i=0;;)
+	{
+		keych = getch();		// read the low-byte keystroke
+	    if(n>=1)	//by何海清
+		{
+			if(keych==46)
+				{continue;}
+		}
+		if ( keych == 13 || (keych == 32) )	//CR key or space key
+		{
+			cerr<<keych;
+			if ( keych == 13 )	cerr<<endl;
+			break;
+		}
+		if ( ( (keych>='0') && (keych<='9') ) || (keych == 46)	//char '.'
+			|| (keych == 8) )
+		{
+			cerr<<keych;
+			if(keych==46) n++;		//by何海清
+			if ( keych == 8)	//'backspace' key
+			{	i--;	cerr<<' '<<keych;
+					//erase unwanted char and come back again
+				if ( prevch == 46)	n=0;	//when erased char is '.'
+			}
+			else
+			{	arr[i++] = keych;
+				prevch = keych;		// for erasure of '.'
+			}
+		}
+	} 
+	arr[i] = '\0';
+	return atof(arr);
+}
+
+class istream_user
+{
+public:
+    istream_user& operator>>(double &d)	{	d = conv( );
+		return *this; }
+} 
 
 
