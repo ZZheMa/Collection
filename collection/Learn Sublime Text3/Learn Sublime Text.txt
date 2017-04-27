@@ -44,6 +44,8 @@ Ctrl + ¡û/¡ú£º ½øĞĞÖğ´ÊÒÆ¶¯£¬
 Ctrl + Shift + ¡û/¡ú£º ½øĞĞÖğ´ÊÑ¡Ôñ
 Ctrl + ¡ü/¡ı: ÒÆ¶¯µ±Ç°ÏÔÊ¾ÇøÓò£¨Ö»ÊÇÏÔÊ¾´°¿ÚµÄ±ä»¯£¬ÎÄ¼ş²»»á±»ĞŞ¸Ä£©
 Ctrl + Shift + ¡ü/¡ı£º ÒÆ¶¯µ±Ç°ĞĞ£¨ÎÄ¼ş»á±»ĞŞ¸Ä£©
+Ctrl + / ×¢ÊÍ
+Ctrl + Shift + / ·´×¢ÊÍ
 
 (C)Ñ¡Ôñ
 Ctrl + D£º Ñ¡Ôñµ±Ç°¹â±êËùÔÚµÄ´Ê²¢¸ßÁÁ¸Ã´ÊËùÓĞ³öÏÖµÄÎ»ÖÃ£¬ÔÙ´ÎCtrl + D£¬»áÑ¡Ôñ¸Ã´Ê³öÏÖµÄÏÂÒ»¸öÎ»ÖÃ
@@ -154,8 +156,27 @@ NOTE£º ËùÌí¼ÓµÄÉèÖÃÒª·ÅÔÚÏÂÃæÕâ¶Î´úÂëÇ°Ãæ£¬·ñÔò»á±¨´í£»Èç¹û½«Æä·ÅÔÚ¸Ã¶Î´úÂë¶ÎºóÃ
     // ±£´æÊ±×Ô¶¯Ôö¼ÓÎÄ¼şÄ©Î²»»ĞĞ
     "ensure_newline_at_eof_on_save": true, 
 
+10. °²×°python¿ØÖÆÌ¨
+1°²×° SublimeREPLCtrl+shift+p 
+install packages¼üÈëSublimeREPL 
+°²×°¼´¿ÉÍ¨¹ıÑ¡ÏîTools->SublimeREPL->Python¼´¿ÉÊ¹ÓÃ¿ØÖÆÌ¨
 
-
+11.°²×°´úÂë²¹È«²å¼ş
+(A)install packages¼üÈëSublimeCodeIntel
+(B)Sublime Text3ÖĞSublimeCodeIntel²å¼şÅäÖÃpython»·¾³
+http://blog.csdn.net/u013887008/article/details/49815567
+µã»÷preferencesÖĞµÄbrowse Packages£¬½øÈëµ½SublimeCodeIntel£¬
+ÔÚµ±Ç°µÄÂ·¾¶ÏÂĞÂ½¨.codeintelÎÄ¼ş¼Ğ(windowsÖĞÎÄ¼şÃüÃûµÄÊ±ºòÎª .codeintel. )£¬
+Ö®ºó½øÈëµ½ .codeintelÎÄ¼ş¼ĞÖĞ£¬ĞÂ½¨ÎÄ¼şconfig£¬ÅäÖÃÎÄ¼şÖĞÊäÈë£º
+"python":{  
+    "python":"C:/Python27/python.exe",  
+    "pythonExtraPaths":[  
+         "C:/Python27/DLLs",  
+         "C:/Python27/Lib",  
+         "C:/Python27/Lib/lib-tk",  
+         "C:/Python27/Lib/site-packages",  
+    ]  
+}  
 
 
 
