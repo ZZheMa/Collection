@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(Learn wxWidgets)
+project(Learn_wxWidgets)
 
 # Enable unicode.
 add_definitions(-DUNICODE -D_UNICODE)

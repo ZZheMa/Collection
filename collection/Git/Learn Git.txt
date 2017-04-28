@@ -10,6 +10,11 @@ git commit -a -m "test git account"
 git config -l 查看配置
 git clone git@kdis-git-server:CSI_Document.git csi/csdc文档
 
+gitk
+
+git br -d 删除分支
+git merge 合并分支
+
 git mv oldfile newfile
 git rm file
 git stash
