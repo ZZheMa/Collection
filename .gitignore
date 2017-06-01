@@ -29,3 +29,4 @@
 *.app
 
 /doc
+build_vc
