@@ -1,5 +1,5 @@
 set(SRCS
-    main.cpp
+    01simple_operation.cpp
     )
 
 set(TARGET_NAME sqlite3_demo)
