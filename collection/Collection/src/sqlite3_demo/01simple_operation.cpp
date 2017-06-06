@@ -13,15 +13,16 @@ static void InsertData();
 static void SelectData();
 static void UpdateData();
 static void DeleteData();
+static void StepExecute();
 
-int main1() {
+int main() {
   //OpenDB();
   //CreateTable();
   //InsertData();
   //SelectData();
   //UpdateData();
   //DeleteData();
-
+  //StepExecute();
   return 0;
 }
 
@@ -106,7 +107,7 @@ static void InsertData() {
     std::cout << "Insert successfully!" << std::endl;
   } else {
     std::cout << "Insert failed! Error msg: " << error_msg << std::endl;
-    sqlite3_free(db);
+    sqlite3_free(error_msg);
   }
 
   sqlite3_close(db);
@@ -151,7 +152,7 @@ static void SelectData() {
     std::cout << "Select successfully!" << std::endl;
   } else {
     std::cout << "Select failed! Error msg: " << error_msg << std::endl;
-    sqlite3_free(db);
+    sqlite3_free(error_msg);
   }
 
   sqlite3_close(db);
@@ -175,7 +176,7 @@ static void UpdateData() {
     std::cout << "Update successfully!" << std::endl;
   } else {
     std::cout << "Update failed! Error msg: " << error_msg << std::endl;
-    sqlite3_free(db);
+    sqlite3_free(error_msg);
   }
 
   sqlite3_close(db);
@@ -198,8 +199,65 @@ static void DeleteData() {
     std::cout << "Delete successfully!" << std::endl;
   } else {
     std::cout << "Delete failed! Error msg: " << error_msg << std::endl;
-    sqlite3_free(db);
+    sqlite3_free(error_msg);
   }
 
+  sqlite3_close(db);
+}
+
+// The statement sqlite3_step is evaluated up to the point where the first row of results are available.
+// To advance to the second row of results, invoke sqlite3_step() again.
+// 1.如果SQL语句执行成功或者正常将返回SQLITE_DONE, 否则将返回错误代码。
+// 2.如果SQL返回了一个单行结果集，sqlite3_step() 函数将返回 SQLITE_ROW,然后继续调用sqlite3_step来得到下一个结果。
+// 3.如果不能打开数据库文件则会返回 SQLITE_BUSY。
+static void StepExecute() {
+  sqlite3* db = NULL;
+
+  int rc = sqlite3_open(kDatabaseName, &db);
+  if (rc != SQLITE_OK) {
+    std::cout << "Open " << kDatabaseName << " failed! Error msg: " << sqlite3_errmsg(db) << std::endl;
+  }
+
+  const char* kSelectSql = "SELECT * FROM COMPANY WHERE ID = ? OR ID = ?;";
+
+  sqlite3_stmt* stmt = NULL;
+  // sqlite3_prepare2 接口把一条SQL语句编译成字节码留给后面的执行函数。
+  rc = sqlite3_prepare_v2(db, kSelectSql, strlen(kSelectSql), &stmt, NULL);
+  if (rc != SQLITE_OK) {
+    std::cout << "Failed to prepare sql!" << std::endl;
+    sqlite3_finalize(stmt);
+    return;
+  }
+
+  // sqlite3_bind 所包含的全部接口，它们是用来给SQL声明中的通配符赋值的。
+  sqlite3_bind_int(stmt, 1, 2);
+  sqlite3_bind_int(stmt, 2, 3);
+
+  do {
+    rc = sqlite3_step(stmt);
+    if (rc == SQLITE_ERROR) {
+      std::cout << "Failed to step execute!" << std::endl;
+      break;
+    }
+
+    if (rc == SQLITE_DONE) {
+      std::cout << "Finished to step execute!" << std::endl;
+      break;
+    }
+
+    int column_count = sqlite3_column_count(stmt);
+    for (int i = 0; i < column_count; ++i) {
+      const unsigned char* column_value = sqlite3_column_text(stmt, i);
+      if (column_value == NULL) {
+        continue;
+      }
+
+      std::cout << sqlite3_column_name(stmt, i) << " = " << column_value << std::endl;
+    }
+
+    std::cout << "=====================================" << std::endl;
+  } while (rc == SQLITE_ROW);
+
+  sqlite3_finalize(stmt);
   sqlite3_close(db);
 }
