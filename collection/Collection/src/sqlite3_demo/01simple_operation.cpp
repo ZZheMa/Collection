@@ -15,7 +15,7 @@ static void UpdateData();
 static void DeleteData();
 static void StepExecute();
 
-int main() {
+int main1() {
   //OpenDB();
   //CreateTable();
   //InsertData();

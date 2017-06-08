@@ -1,5 +1,6 @@
 set(SRCS
     01simple_operation.cpp
+    02performance_test.cpp
     )
 
 set(TARGET_NAME sqlite3_demo)
