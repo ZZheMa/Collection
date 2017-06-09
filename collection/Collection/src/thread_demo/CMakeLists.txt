@@ -1,16 +1,13 @@
 set(SRCS
-    01simple_operation.cpp
-    02performance_test.cpp
-    03concurrence_test.cpp
+    01cpp_thread.cpp
     )
 
-set(TARGET_NAME sqlite3_demo)
-set(TARGET_OUTPUT_NAME sqlite3_demo)
+set(TARGET_NAME thread_demo)
+set(TARGET_OUTPUT_NAME thread_demo)
 
 add_executable(${TARGET_NAME} ${SRCS})
 
 set(EXTRA_LIBS
-    sqlite3
     )
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
