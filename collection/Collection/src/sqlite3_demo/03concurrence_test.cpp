@@ -113,7 +113,7 @@ static void InsertData(bool set_busy_handler, std::list<int> datas) {
   sqlite3_close(db);
 }
 
-int main3() {
+int main() {
   //PrepareTable();
   ClearTable();
 

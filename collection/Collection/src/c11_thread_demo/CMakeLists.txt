@@ -1,9 +1,9 @@
 set(SRCS
-    01cpp_thread.cpp
+    01create.cpp
     )
 
-set(TARGET_NAME thread_demo)
-set(TARGET_OUTPUT_NAME thread_demo)
+set(TARGET_NAME c11_thread_demo)
+set(TARGET_OUTPUT_NAME c11_thread_demo)
 
 add_executable(${TARGET_NAME} ${SRCS})
 
