@@ -4,6 +4,9 @@
 #include <list>
 #include <thread>
 
+// ²Î¿¼£ºhttps://www.codeproject.com/Articles/598695/Cplusplus-threads-locks-and-condition-variables
+// http://www.cnblogs.com/haippy/p/3284540.html
+
 static void Test1(int x, const std::string& y) {
   std::cout << x << y << std::endl;
 
@@ -84,7 +87,16 @@ static void Demo2() {
 
 //------------------------------------------------------------------
 
-int main() {
+// 3.std::this_thread
+// get_id: returns the id of the current thread
+// yield : tells the scheduler to run other threads and can be used when you are in a busy waiting state
+// sleep_for : blocks the execution of the current thread for at least the specified period
+// sleep_util : blocks the execution of the current thread until the specified moment of time has been reached
+
+
+//------------------------------------------------------------------
+
+int main1() {
   //Demo1();
   //Demo2();
 

@@ -1,5 +1,7 @@
 set(SRCS
     01create.cpp
+    02lock.cpp
+    03condition_variable.cpp
     )
 
 set(TARGET_NAME c11_thread_demo)
