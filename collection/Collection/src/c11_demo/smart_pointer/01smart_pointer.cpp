@@ -327,7 +327,7 @@ static void TestDestructOrder() {
 
 }  // smart_pointer
 
-int main() {
+int main_smart() {
   using namespace smart_pointer;
 
   //TestDestructOrder();
