@@ -45,7 +45,7 @@ private:
   int y_;
 };
 
-int main() {
+int main1() {
   Point point(1, 2);
   cout << point << endl;
   cout << (int)point << endl;

@@ -1,5 +1,6 @@
 set(SRCS
     01override_class.cpp
+    02var_list.cpp
     )
 
 set(TARGET_NAME other)
