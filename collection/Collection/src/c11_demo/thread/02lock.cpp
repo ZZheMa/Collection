@@ -6,6 +6,8 @@
 #include <thread>
 #include <cstdarg>
 
+namespace thread_lock {
+
 std::mutex g_io_mutex;
 
 //------------------------------------------------------------------------
@@ -116,6 +118,8 @@ static void Test3() {
     thread.join();
   }
 }
+
+}  // namespace thread_lock
 
 //------------------------------------------------------------------------
 

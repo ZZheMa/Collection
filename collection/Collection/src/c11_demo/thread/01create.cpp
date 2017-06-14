@@ -4,6 +4,8 @@
 #include <list>
 #include <thread>
 
+namespace thread_create {
+
 // ²Î¿¼£ºhttps://www.codeproject.com/Articles/598695/Cplusplus-threads-locks-and-condition-variables
 // http://www.cnblogs.com/haippy/p/3284540.html
 
@@ -93,6 +95,8 @@ static void Demo2() {
 // sleep_for : blocks the execution of the current thread for at least the specified period
 // sleep_util : blocks the execution of the current thread until the specified moment of time has been reached
 
+
+}  // namespace thread_create
 
 //------------------------------------------------------------------
 
