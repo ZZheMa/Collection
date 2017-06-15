@@ -25,7 +25,7 @@ static const std::string kExitFlag = "-1";
 
 // 参考：http://c.biancheng.net/cpp/html/3030.html
 
-int main() {
+int mains1() {
   // 初始化socket dll。
   // WinSock 规范的最新版本号为 2.2。
   // //主版本号为2，副版本号为2，返回 0x0202。

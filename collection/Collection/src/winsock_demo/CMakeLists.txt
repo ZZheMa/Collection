@@ -1,6 +1,8 @@
 set(SRCS
     01tcp_server.cpp
     01tcp_client.cpp
+    02udp_server.cpp
+    02udp_client.cpp
     )
 
 set(TARGET_NAME winsock_demo)
