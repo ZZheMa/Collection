@@ -3,6 +3,7 @@ set(SRCS
     thread/02lock.cpp
     thread/03condition_variable.cpp
     thread/04producer_consumer.cpp
+    thread/05atomic.cpp
     
     smart_pointer/01smart_pointer.cpp
     )

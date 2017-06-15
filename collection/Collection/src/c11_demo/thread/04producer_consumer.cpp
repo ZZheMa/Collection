@@ -220,7 +220,7 @@ static void Test4() {
 
 }  // namespace producer_consumer
 
-int main() {
+int main4() {
   using namespace producer_consumer;
 
   //Test1();
