@@ -75,7 +75,7 @@ static void Test(ClickFunc click_func) {
   std::cout << " s_atomic_clicked_count£º " << s_atomic_clicked_count << std::endl;
 }
 
-int main() {
+int main5() {
   std::cout << "ÎÞËø·ÃÎÊ£º ";
   Test(Click1);
 

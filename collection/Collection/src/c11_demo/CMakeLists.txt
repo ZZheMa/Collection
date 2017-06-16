@@ -4,7 +4,8 @@ set(SRCS
     thread/03condition_variable.cpp
     thread/04producer_consumer.cpp
     thread/05atomic.cpp
-    
+    thread/06future.cpp
+
     smart_pointer/01smart_pointer.cpp
     )
 
