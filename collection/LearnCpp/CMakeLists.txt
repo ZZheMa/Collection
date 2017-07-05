@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(Collection)
+project(LearnCpp)
 
 add_definitions(-DUNICODE -D_UNICODE)
 
