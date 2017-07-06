@@ -36,7 +36,7 @@ static void PrintAllTagInfos(DcmItem* item, int space_count = 0) {
   }
 }
 
-int main(int argc, char *argv[]) {
+int main1(int argc, char *argv[]) {
   DcmFileFormat file_format;
   OFCondition oc = file_format.loadFile(kFilePath);
   if (oc.bad()) {
@@ -46,11 +46,11 @@ int main(int argc, char *argv[]) {
   DcmDataset* dataset = file_format.getDataset();
   DcmMetaInfo* meta_info = file_format.getMetaInfo();
 
-  PrintAllTagInfos(meta_info);
-  PrintAllTagInfos(dataset);
+  //PrintAllTagInfos(meta_info);
+  //PrintAllTagInfos(dataset);
 
   //dataset->print(std::cout);
-  //meta_info->print(std::cout);
+  meta_info->print(std::cout);
 
   //if (oc.good()) {
   //  OFString patientName;

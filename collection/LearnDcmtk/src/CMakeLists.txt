@@ -1,5 +1,6 @@
 set(SRCS
     01print_tag_infos.cpp
+    02add_same_items.cpp
     )
 
 GROUP_SOURCES_BY_DIR(SRCS)
