@@ -122,7 +122,7 @@ static void InsertData(int type) {
   sqlite3_close(db);
 }
 
-int main() {
+int main05() {
   DeleteFile(L"test_primarykey.db");
 
   PrepareTable();
