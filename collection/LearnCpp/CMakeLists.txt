@@ -6,6 +6,19 @@ add_definitions(-DUNICODE -D_UNICODE)
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
+set(THIRD_PARTY_DIR    ${PROJECT_SOURCE_DIR}/third_party)
+
+# SOCI
+set(SOCI_LIB_DIR    ${THIRD_PARTY_DIR}/soci-3.2.3/lib)
+set(SOCI_INCLUDE_DIR    ${THIRD_PARTY_DIR}/soci-3.2.3)
+set(SOCI_DLL_DIR    ${THIRD_PARTY_DIR}/soci-3.2.3/bin)
+
+#message("${SOCI_INCLUDE_DIR}")
+
+IF(MSVC)
+  ADD_DEFINITIONS(-D_CRT_SECURE_NO_WARNINGS)
+ENDIF(MSVC)
+
 # Group sources by dir.
 # Usage: GROUP_SOURCES_BY_DIR(SRCS)
 macro(GROUP_SOURCES_BY_DIR source_files)
