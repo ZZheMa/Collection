@@ -134,7 +134,7 @@ static bool InsertData(SQLHDBC hdbc) {
   return true;
 }
 
-int main() {
+int main11() {
   SQLHENV henv = SQL_NULL_HENV;
   SQLHDBC hdbc = SQL_NULL_HDBC;
 

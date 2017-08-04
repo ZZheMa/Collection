@@ -6,6 +6,7 @@ set(SRCS
     sqlite3/05primarykey_test.cpp
 
     odbc/01odbc_access.cpp
+    soci/01simple_operation.cpp
     )
 
 GROUP_SOURCES_BY_DIR(SRCS)
