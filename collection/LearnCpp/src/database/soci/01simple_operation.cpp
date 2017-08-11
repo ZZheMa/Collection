@@ -15,7 +15,7 @@ static void CreateTable(soci::session& db) {
   db << "CREATE TABLE IF NOT EXISTS STUDENTS ("
         "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
         "NAME VARCHAR(50) NOT NULL,"
-        "AGE INIEGER NOT NULL"
+        "AGE INTEGER NOT NULL"
         ")";
 }
 
@@ -128,7 +128,7 @@ static void TestSelectAll(soci::session& db) {
   }
 }
 
-int main001() {
+int main() {
   // 1.打开数据库，如果数据库不存在，则创建文件数据库soci_test.db。
   soci::session db("sqlite3", "soci_test.db");
 

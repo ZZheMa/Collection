@@ -7,6 +7,7 @@ set(SRCS
 
     odbc/01odbc_access.cpp
     soci/01simple_operation.cpp
+    soci/02orm.cpp
     )
 
 GROUP_SOURCES_BY_DIR(SRCS)
