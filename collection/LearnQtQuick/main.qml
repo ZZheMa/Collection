@@ -17,7 +17,11 @@ Window {
 //        }
 //    }
 
-    HelloWorldArea {
+//    HelloWorldArea {
+//        anchors.fill: parent
+//    }
+
+    StudentsListView {
         anchors.fill: parent
     }
 }

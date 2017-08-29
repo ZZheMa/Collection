@@ -4,5 +4,7 @@
         <file>Cell.qml</file>
         <file>HelloWorldArea.qml</file>
         <file>SimpleButton.qml</file>
+        <file>StudentsListView.qml</file>
+        <file>StudentsListViewModel.qml</file>
     </qresource>
 </RCC>
