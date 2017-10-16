@@ -1,11 +1,9 @@
-set(SRCS
-    01override_class.cpp
-    02var_list.cpp
-    03const_pointer.cpp
+﻿set(SRCS
+    main.cpp
     )
 
-set(TARGET_NAME other)
-set(TARGET_OUTPUT_NAME other)
+set(TARGET_NAME test)
+set(TARGET_OUTPUT_NAME test)
 
 add_executable(${TARGET_NAME} ${SRCS})
 

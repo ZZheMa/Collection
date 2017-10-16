@@ -4,6 +4,7 @@ set(SRCS
     sqlite3/03concurrence_test.cpp
     sqlite3/04dirty_read.cpp
     sqlite3/05primarykey_test.cpp
+    sqlite3/06open_close_cost.cpp
 
     odbc/01odbc_access.cpp
     soci/01simple_operation.cpp

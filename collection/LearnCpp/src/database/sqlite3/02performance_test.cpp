@@ -36,7 +36,7 @@ static void PerformanceTest();
 
 //--------------------------------------------------------------
 
-int main() {
+int main022() {
   //TestTimer();
   //ClearTable();
   CreateTable();
