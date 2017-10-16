@@ -36,10 +36,10 @@ static void PerformanceTest();
 
 //--------------------------------------------------------------
 
-int main2() {
+int main() {
   //TestTimer();
-  ClearTable();
-  //CreateTable();
+  //ClearTable();
+  CreateTable();
 
   PerformanceTest();
 
@@ -49,12 +49,12 @@ int main2() {
 //--------------------------------------------------------------
 
 static void PerformanceTest() {
-  //TestExec(false);
-  //TestExec(true);
+  TestExec(false);
+  TestExec(true);
   TestNoSynchronous();
-  //TestTransactionExec();
-  //TestStep(true);
-  //TestStep(false);
+  TestTransactionExec();
+  TestStep(true);
+  TestStep(false);
 }
 
 // 1.直接执行sqlite3_exec。
@@ -65,15 +65,15 @@ static void TestExec(bool turn_off_synchronous) {
   }
 
   if (turn_off_synchronous) {
-    std::cout << "关闭写同步执行sqlite3_exec : " << std::endl;
+    std::cout << "1.关闭写同步执行sqlite3_exec : " << std::endl;
   } else {
-    std::cout << "直接执行sqlite3_exec : " << std::endl;
+    std::cout << "2.直接执行sqlite3_exec : " << std::endl;
   }
 
   utility::Timer timer;
   std::stringstream sstream(std::stringstream::out);
 
-  const int kDataCount = 100;
+  const int kDataCount = 1000;
   const char* kTurnOffSynchronous = "PRAGMA synchronous = OFF;";
 
   if (turn_off_synchronous) {
@@ -102,7 +102,7 @@ static void TestExec(bool turn_off_synchronous) {
   }
 
   rate = kDataCount / timer.GetSeconds();
-  std::cout << "删除数据： " << rate << "条/秒" << std::endl;
+  std::cout << "删除数据： " << rate << "条/秒\n" << std::endl;
 
   sqlite3_close(db);
 }
@@ -117,12 +117,12 @@ static void TestTransactionExec() {
     return;
   }
 
-  std::cout << "显式开启事务执行sqlite3_exec : " << std::endl;
+  std::cout << "3.显式开启事务执行sqlite3_exec : " << std::endl;
 
   utility::Timer timer;
   std::stringstream sstream(std::stringstream::out);
 
-  const int kDataCount = 10000;
+  const int kDataCount = 100000;
   const char* kBeginTransaction = "begin";
   const char* kCommitTransaction = "commit";
 
@@ -152,7 +152,7 @@ static void TestTransactionExec() {
   sqlite3_exec(db, kCommitTransaction, NULL, NULL, NULL);
 
   rate = kDataCount / timer.GetSeconds();
-  std::cout << "删除数据： " << rate << "条/秒" << std::endl;
+  std::cout << "删除数据： " << rate << "条/秒\n" << std::endl;
 
   sqlite3_close(db);
 }
@@ -171,12 +171,12 @@ static void TestNoSynchronous() {
     return;
   }
 
-  std::cout << "关闭写同步且显式开启事务执行sqlite3_exec : " << std::endl;
+  std::cout << "4.关闭写同步且显式开启事务执行sqlite3_exec : " << std::endl;
 
   utility::Timer timer;
   std::stringstream sstream(std::stringstream::out);
 
-  const int kDataCount = 10000;
+  const int kDataCount = 100000;
   const char* kTurnOffSynchronous = "PRAGMA synchronous = OFF;";
   const char* kBeginTransaction = "begin";
   const char* kCommitTransaction = "commit";
@@ -209,7 +209,7 @@ static void TestNoSynchronous() {
   sqlite3_exec(db, kCommitTransaction, NULL, NULL, NULL);
 
   rate = kDataCount / timer.GetSeconds();
-  std::cout << "删除数据： " << rate << "条/秒" << std::endl;
+  std::cout << "删除数据： " << rate << "条/秒\n" << std::endl;
 
   sqlite3_close(db);
 }
@@ -229,16 +229,16 @@ static void TestStep(bool turn_on_transaction) {
     return;
   }
 
-  std::string title = "直接执行sqlite3_step : ";
+  std::string title = "5.直接执行sqlite3_step : ";
   if (turn_on_transaction) {
-    title = "显式开启事务执行sqlite3_step : ";
+    title = "6.显式开启事务执行sqlite3_step : ";
   }
 
   std::cout << title << std::endl;
 
   utility::Timer timer;
 
-  int data_count = 20;
+  int data_count = 100;
   if (turn_on_transaction) {
     data_count = 10000;
   }
@@ -297,7 +297,7 @@ static void TestStep(bool turn_on_transaction) {
   sqlite3_finalize(stmt);
 
   rate = data_count / timer.GetSeconds();
-  std::cout << "删除数据： " << rate << "条/秒" << std::endl;
+  std::cout << "删除数据： " << rate << "条/秒\n" << std::endl;
 
   sqlite3_close(db);
 }

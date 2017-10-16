@@ -128,7 +128,7 @@ static void TestSelectAll(soci::session& db) {
   }
 }
 
-int main() {
+int main111() {
   // 1.打开数据库，如果数据库不存在，则创建文件数据库soci_test.db。
   soci::session db("sqlite3", "soci_test.db");
 
