@@ -1,6 +1,7 @@
 ﻿set(SRCS
-    parabola_equation_dll.h
-    parabola_equation_dll.cpp
+    parabola_equation_api.h
+    parabola_equation_api.cpp
+    main.cpp
     )
 
 add_definitions(-DPARABOLA_EQUATION_EXPORT)
@@ -8,9 +9,9 @@ add_definitions(-DPARABOLA_EQUATION_EXPORT)
 # Project name
 set(TARGET_NAME parabola_equation_dll)
 # Executable Name
-set(TARGET_OUTPUT_NAME parabola_equation_dll)
+set(TARGET_OUTPUT_NAME parabola_equation_api)
 
-add_library(parabola_equation_dll SHARED ${SRCS})
+add_library(${TARGET_NAME} SHARED ${SRCS})
 
 set(EXTRA_LIBS
     parabola_equation_sdk

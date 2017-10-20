@@ -1,9 +1,11 @@
 ﻿set(SRCS
+    parabola_equation_wrapper.h
+    parabola_equation_wrapper.cpp
     main.cpp
     )
 
-set(TARGET_NAME test)
-set(TARGET_OUTPUT_NAME test)
+set(TARGET_NAME parabola_dll_wrapper)
+set(TARGET_OUTPUT_NAME parabola_dll_wrapper)
 
 add_executable(${TARGET_NAME} ${SRCS})
 

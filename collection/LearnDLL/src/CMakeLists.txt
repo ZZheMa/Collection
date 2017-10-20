@@ -1,3 +1,3 @@
 add_subdirectory(parabola_equation_sdk)
 add_subdirectory(parabola_equation_dll)
-add_subdirectory(test)
+add_subdirectory(parabola_dll_wrapper)
