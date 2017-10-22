@@ -52,7 +52,7 @@ int Parabola_OutputY(ParabolaHandle* handle, double x, double* y) {
   }
 
   ParabolaEquation* parabola = (ParabolaEquation*)handle;
-  *y = parabola->OutputSlope(x);
+  *y = parabola->OutputY(x);
 
   return 1;
 }
