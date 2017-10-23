@@ -4,6 +4,7 @@ add_subdirectory(c11_demo)
 add_subdirectory(other)
 add_subdirectory(ut)
 add_subdirectory(utility)
+add_subdirectory(tinyxml_demo)
 
 # Third Party
 add_subdirectory(tinyxml)

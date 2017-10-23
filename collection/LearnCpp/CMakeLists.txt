@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(LearnCpp)
 
-add_definitions(-DUNICODE -D_UNICODE)
+add_definitions(-DUNICODE -D_UNICODE )
+
+# Enable TinyXml STL
+add_definitions(-DTIXML_USE_STL)
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
