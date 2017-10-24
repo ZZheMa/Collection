@@ -5,8 +5,10 @@ add_subdirectory(other)
 add_subdirectory(ut)
 add_subdirectory(utility)
 add_subdirectory(tinyxml_demo)
+add_subdirectory(pugixml_demo)
 
 # Third Party
 add_subdirectory(tinyxml)
 add_subdirectory(gtest)
 add_subdirectory(sqlite3)
+add_subdirectory(pugixml)
