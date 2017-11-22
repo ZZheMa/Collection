@@ -23,6 +23,13 @@ Window {
         id: randomColorMaker
     }
 
+    Rectangle {
+        id: colorRect
+        width: 200
+        height: 200
+        anchors.centerIn: parent
+    }
+
     Button {
         id: startButton
         text: qsTr("Start")
@@ -44,14 +51,50 @@ Window {
         }
     }
 
+    Button {
+        id: algotithmButton
+        anchors.left: stopButton.right
+        anchors.bottom: parent.bottom
+        onClicked: {
+            var algorithm = randomColorMaker.colorAlgorithm();
+            algorithm = (algorithm + 1) % RandomColorMaker.RandomColorCount;
+            randomColorMaker.setColorAlgorithm(algorithm);
+            text = convertColorAlgorithmToString(algorithm);
+        }
+    }
+
+    function convertColorAlgorithmToString(randomColorAlgorithm) {
+        if (randomColorAlgorithm === RandomColorMaker.RandomColorRed) {
+            return qsTr("RandomRed");
+        } else if (randomColorAlgorithm === RandomColorMaker.RandomColorGreen) {
+            return qsTr("RandomGreen");
+        } else if (randomColorAlgorithm === RandomColorMaker.RandomColorBlue) {
+            return qsTr("RandomBlue");
+        } else if (randomColorAlgorithm === RandomColorMaker.RandomColorRgb) {
+            return qsTr("RandomRGB");
+        } else if (randomColorAlgorithm === RandomColorMaker.RandomColorLinearIncrease) {
+            return qsTr("RandomLinearIncrease");
+        }
+    }
+
+    Component.onCompleted: {
+        randomColorMaker.color = "black"
+        algotithmButton.text = convertColorAlgorithmToString(randomColorMaker.colorAlgorithm())
+    }
+
     Connections {
         target: randomColorMaker
         onColorChanged: {
-            currentDateTimeText.color = color
+            colorRect.color = color
         }
 
         onCurrentTimeNotified: {
             currentDateTimeText.text = time
+            currentDateTimeText.color = randomColorMaker.timeColor;
         }
+    }
+
+    Connections {
+        target: randomColorMaker
     }
 }
