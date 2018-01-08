@@ -34,6 +34,9 @@ http://10.112.37.192:8080/    CSI-2013
 最后提交代码git push origin HEAD:refs/for/master
 该代码只是提交到gerrit中，这个平台用来codereview，然后才能提交到仓库。
 
+// 选择某一个分支中的一个或几个commit(s)来进行操作
+git cherry-pick <commit id>
+
 // 2016.9.14
 返回提交前状态。
 git his1d
