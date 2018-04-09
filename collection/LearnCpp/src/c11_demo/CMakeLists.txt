@@ -7,6 +7,8 @@ set(SRCS
     thread/06future.cpp
 
     smart_pointer/01smart_pointer.cpp
+
+    move.cpp
     )
 
 GROUP_SOURCES_BY_DIR(SRCS)
