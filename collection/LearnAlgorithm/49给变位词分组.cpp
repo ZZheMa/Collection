@@ -48,6 +48,32 @@ void change_to_vector(std::string &str, std::vector<int> &vec) {
   }
 }
 
+//--------------------------------------------------------------
+// 法二：
+std::vector<std::vector<std::string>> groupAnagrams2(const std::vector<std::string>& strs) {
+  std::unordered_map<std::string, int> anagram_mapping;
+  std::vector<std::vector<std::string>> result;
+
+  for (const auto& str : strs) {
+    std::string key = str;
+    std::sort(key.begin(), key.end());  // 将排序后的字符串作为key。
+
+    auto it = anagram_mapping.find(key);
+    if (it == anagram_mapping.end()) {
+      anagram_mapping[key] = result.size();
+
+      std::vector<std::string> group{ str };
+      result.push_back(group);
+    } else {
+      result[it->second].push_back(str);
+    }
+  }
+
+  return result;
+}
+
+//--------------------------------------------------------------
+
 void PrintResult(const std::vector<std::vector<std::string>>& result) {
   for (const auto& subset : result) {
     for (const auto& item : subset) {
@@ -60,6 +86,7 @@ void PrintResult(const std::vector<std::vector<std::string>>& result) {
 
 int main() {
   PrintResult(groupAnagrams({ "eat", "tea", "tan", "ate", "nat", "bat" }));
+  PrintResult(groupAnagrams2({ "eat", "tea", "tan", "ate", "nat", "bat" }));
 
   return 0;
 }
