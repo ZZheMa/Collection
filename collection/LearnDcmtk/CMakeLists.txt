@@ -4,6 +4,14 @@ project(LearnDcmtk)
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
+add_definitions(-DNOMINMAX)
+
+# Find DCMTK
+find_package(DCMTK REQUIRED)
+if(DCMTK_FOUND)
+    include_directories(${DCMTK_INCLUDE_DIRS})
+endif(DCMTK_FOUND)
+
 # Group sources by dir.
 # Usage: GROUP_SOURCES_BY_DIR(SRCS)
 macro(GROUP_SOURCES_BY_DIR source_files)
